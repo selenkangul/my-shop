@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Products | ABAGI ART</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="logo-wrap">
+      <img src="images/abagi-logo.jpg" alt="Abagi Art logo" class="logo">
+      <span class="brand-name">ABAGI ART</span>
+    </a>
+    <nav>
+      <ul class="nav-tabs">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="workshop.html">Workshop</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero photo of a variety of products — replace filename once uploaded -->
+  <img src="images/products-hero.jpg" alt="A variety of Abagi Art products" class="hero-img">
+
+  <h1>Products</h1>
+
+  <!-- Top-level category buttons -->
+  <div class="category-filters" id="main-filters">
+    <button data-category="all" class="active">View All</button>
+    <button data-category="earrings">Earrings</button>
+    <button data-category="home-decor">Home Decorations</button>
+  </div>
+
+  <!-- Sub-category buttons, only shown when "Home Decorations" is selected -->
+  <div class="category-filters" id="sub-filters" style="display: none;">
+    <button data-subcategory="all" class="active">All Home Decor</button>
+    <button data-subcategory="vase">Vases</button>
+    <button data-subcategory="candles">Candles</button>
+    <button data-subcategory="trays">Trays</button>
+    <button data-subcategory="boxes">Boxes</button>
+    <button data-subcategory="bowls">Bowls</button>
+    <button data-subcategory="coasters">Coasters</button>
+    <button data-subcategory="incense-holders">Incense Holders</button>
+  </div>
+
+  <div class="grid" id="product-grid"></div>
+
+  <script>
+    // ===== YOUR PRODUCT CATALOG =====
+    // Add a new product by copying one object below and editing it.
+    // category: "earrings" or "home-decor"
+    // subcategory: only matters for home-decor items — use one of:
+    //   vase, candles, trays, boxes, bowls, coasters, incense-holders
+    // stripeLink: paste your real Stripe Payment Link URL here once created
+    const products = [
+      {
+        name: "Round Vase",
+        variant: "",
+        price: 45.00,
+        image: "images/round-vase-1.jpg",
+        category: "home-decor",
+        subcategory: "vase",
+        stripeLink: "https://buy.stripe.com/TODO_round_vase"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Round",
+        price: 22.00,
+        image: "images/Earring-black-gold-round-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_round"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Organic",
+        price: 35.00,
+        image: "images/Earring-black-gold-organic-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_organic"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Rock 1",
+        price: 22.00,
+        image: "images/Earring-black-gold-rock-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_rock1"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Rock 2",
+        price: 22.00,
+        image: "images/Earring-black-gold-rock-2.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_rock2"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Asymetric",
+        price: 35.00,
+        image: "images/Earring-black-gold-asymetric-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_asymetric"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Oval",
+        price: 35.00,
+        image: "images/Earring-black-gold-oval-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_oval"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Rectangle",
+        price: 35.00,
+        image: "images/Earring-black-gold-rectangle-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_rectangle"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Edges",
+        price: 35.00,
+        image: "images/Earring-black-gold-edges-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_edges"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Moon-Star",
+        price: 35.00,
+        image: "images/Earring-black-gold-moonstar-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_moonstar"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Bullet",
+        price: 35.00,
+        image: "images/Earring-black-gold-bullet-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_bullet"
+      },
+      {
+        name: "Gold flake series",
+        variant: "Black | Drops",
+        price: 35.00,
+        image: "images/Earring-black-gold-drops-1.png",
+        category: "earrings",
+        subcategory: null,
+        stripeLink: "https://buy.stripe.com/TODO_earring_drops"
+      }
+      // ...add more products here
+    ];
+
+    let activeCategory = "all";
+    let activeSubcategory = "all";
+
+    function renderProducts() {
+      const grid = document.getElementById("product-grid");
+
+      const filtered = products.filter((p) => {
+        if (activeCategory === "all") return true;
+        if (p.category !== activeCategory) return false;
+        if (activeCategory === "home-decor" && activeSubcategory !== "all") {
+          return p.subcategory === activeSubcategory;
+        }
+        return true;
+      });
+
+      grid.innerHTML = filtered
+        .map(
+          (p) => `
+        <a href="${p.stripeLink}" target="_blank">
+          <img src="${p.image}" width="200" alt="${p.name} ${p.variant}">
+          <p class="product-title">${p.name}</p>
+          ${p.variant ? `<p class="variant">${p.variant}</p>` : ""}
+          <p class="price">CHF ${p.price.toFixed(2)}</p>
+        </a>
+      `
+        )
+        .join("");
+    }
+
+    // Top-level filter buttons
+    document.querySelectorAll("#main-filters button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document
+          .querySelectorAll("#main-filters button")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        activeCategory = btn.dataset.category;
+        activeSubcategory = "all";
+
+        document.getElementById("sub-filters").style.display =
+          activeCategory === "home-decor" ? "flex" : "none";
+        document
+          .querySelectorAll("#sub-filters button")
+          .forEach((b) => b.classList.remove("active"));
+        document.querySelector('#sub-filters button[data-subcategory="all"]')
+          .classList.add("active");
+
+        renderProducts();
+      });
+    });
+
+    // Sub-category filter buttons
+    document.querySelectorAll("#sub-filters button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document
+          .querySelectorAll("#sub-filters button")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeSubcategory = btn.dataset.subcategory;
+        renderProducts();
+      });
+    });
+
+    renderProducts();
+  </script>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-contact">
+        <a href="mailto:abagi.art@gmail.com" class="footer-icon-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
+          abagi.art@gmail.com
+        </a>
+        <a href="https://www.instagram.com/abagi_art?igsh=OTJkN3EyNHk2a3dx&utm_source=qr" target="_blank" class="footer-icon-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+      </div>
+      <div class="footer-address">
+        <p class="footer-address-title">Where to find Abagi products</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Station.24+Lausanne" target="_blank">Station.24, Lausanne</a>
+      </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 Abagi Art. Handmade in Switzerland.</p>
+  </footer>
+
+</body>
+</html>
