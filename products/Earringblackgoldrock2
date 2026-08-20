@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>-Gold flake earring series | ABAGI ART</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <a href="../index.html">← Back to shop</a>
+  <h1>Earring-black-gold-rock-2</h1>
+  <img src="../images/Earring-black-gold-rock-2.png" alt="Gold flake earring serries | Black | Rock-2 " width="400">
+  <p>Handmade earrings from Gold Flake series, Rock shape, will make you look elegant.</p>
+  <p><strong>CHF 22</strong></p>
+  <!-- buy button goes here once we set up payments -->
+</body>
+</html>
