@@ -77,14 +77,105 @@ h1, h2, h3 {
 
 .nav-tabs a {
   font-size: 0.95rem;
-  padding: 6px 2px;
-  border-bottom: 2px solid transparent;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.nav-tabs a:hover,
-.nav-tabs a.active {
-  border-bottom: 2px solid var(--color-orange-dark);
+.nav-tabs a:hover {
+  background: rgba(205, 118, 23, 0.1);
   color: var(--color-orange-dark);
+}
+
+.nav-tabs a.active {
+  background: var(--color-orange-dark);
+  color: white;
+}
+
+/* ===== Hero image (Workshop / Products pages) ===== */
+.hero-img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 30px;
+}
+
+/* ===== Workshop details block ===== */
+.workshop-details {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 20px 0 30px;
+}
+
+.workshop-details p {
+  margin: 6px 0;
+}
+
+/* ===== Call-to-action buttons (Book a spot, See more, etc.) ===== */
+.btn {
+  display: inline-block;
+  background: var(--color-orange-dark);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(205, 118, 23, 0.25);
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  background: #B5660F;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(205, 118, 23, 0.32);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--color-orange-dark);
+  border: 1.5px solid var(--color-orange-dark);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(205, 118, 23, 0.08);
+  box-shadow: none;
+}
+
+.see-more {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ===== Category filter buttons ===== */
+.category-filters button {
+  padding: 9px 18px;
+  border: 1.5px solid var(--color-border);
+  background: white;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: all 0.15s ease;
+}
+
+.category-filters button:hover {
+  border-color: var(--color-orange-dark);
+}
+
+.category-filters button.active {
+  background: var(--color-orange-dark);
+  color: white;
+  border-color: var(--color-orange-dark);
 }
 
 /* ===== Product grid ===== */
@@ -128,6 +219,13 @@ h1, h2, h3 {
   font-size: 1rem;
   color: var(--color-text);
   font-weight: 600;
+  margin-bottom: 0;
+}
+
+.variant {
+  color: #6b6660;
+  font-size: 0.88rem;
+  margin-top: -2px;
 }
 
 .price {
@@ -138,9 +236,74 @@ h1, h2, h3 {
 /* ===== Footer ===== */
 .site-footer {
   margin-top: 80px;
-  padding-top: 20px;
+  padding-top: 30px;
   border-top: 1px solid var(--color-border);
   color: #a89f92;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.15s ease;
+}
+
+.footer-icon-link:hover {
+  color: var(--color-orange-dark);
+}
+
+.footer-icon-link svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.footer-address {
+  text-align: right;
+}
+
+.footer-address-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  margin: 0 0 4px;
+}
+
+.footer-address a {
+  color: var(--color-orange-dark);
+  font-weight: 600;
+}
+
+.footer-address a:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
   text-align: center;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 500px) {
+  .footer-content { flex-direction: column; }
+  .footer-address { text-align: left; }
 }
