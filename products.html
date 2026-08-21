@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Products | ABAGI ART</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
@@ -25,9 +26,6 @@
       </ul>
     </nav>
   </header>
-
-  <!-- Hero photo of a variety of products — replace filename once uploaded -->
-  <img src="images/products-hero.jpg" alt="A variety of Abagi Art products" class="hero-img">
 
   <h1>Products</h1>
 
@@ -67,7 +65,8 @@
         image: "images/round-vase-1.jpg",
         category: "home-decor",
         subcategory: "vase",
-        stripeLink: "https://buy.stripe.com/TODO_round_vase"
+        stripeLink: "https://buy.stripe.com/TODO_round_vase",
+        detailPage: "products/Vase.html"
       },
       {
         name: "Gold flake series",
@@ -76,7 +75,8 @@
         image: "images/Earring-black-gold-round-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_round"
+        stripeLink: "https://buy.stripe.com/TODO_earring_round",
+        detailPage: "products/Earringblackgoldround.html"
       },
       {
         name: "Gold flake series",
@@ -85,7 +85,8 @@
         image: "images/Earring-black-gold-organic-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_organic"
+        stripeLink: "https://buy.stripe.com/TODO_earring_organic",
+        detailPage: "products/Earringblackgoldorganic.html"
       },
       {
         name: "Gold flake series",
@@ -94,7 +95,8 @@
         image: "images/Earring-black-gold-rock-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_rock1"
+        stripeLink: "https://buy.stripe.com/TODO_earring_rock1",
+        detailPage: "products/Earringblackgoldrock1.html"
       },
       {
         name: "Gold flake series",
@@ -103,7 +105,8 @@
         image: "images/Earring-black-gold-rock-2.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_rock2"
+        stripeLink: "https://buy.stripe.com/TODO_earring_rock2",
+        detailPage: "products/Earringblackgoldrock2.html"
       },
       {
         name: "Gold flake series",
@@ -112,7 +115,8 @@
         image: "images/Earring-black-gold-asymetric-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_asymetric"
+        stripeLink: "https://buy.stripe.com/TODO_earring_asymetric",
+        detailPage: "products/Earringblackgoldasymetric.html"
       },
       {
         name: "Gold flake series",
@@ -121,7 +125,8 @@
         image: "images/Earring-black-gold-oval-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_oval"
+        stripeLink: "https://buy.stripe.com/TODO_earring_oval",
+        detailPage: "products/Earringblackgoldoval.html"
       },
       {
         name: "Gold flake series",
@@ -130,7 +135,8 @@
         image: "images/Earring-black-gold-rectangle-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_rectangle"
+        stripeLink: "https://buy.stripe.com/TODO_earring_rectangle",
+        detailPage: "products/Earringblackgoldrectangle.html"
       },
       {
         name: "Gold flake series",
@@ -139,7 +145,8 @@
         image: "images/Earring-black-gold-edges-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_edges"
+        stripeLink: "https://buy.stripe.com/TODO_earring_edges",
+        detailPage: "products/Earringblackgoldedges.html"
       },
       {
         name: "Gold flake series",
@@ -148,7 +155,8 @@
         image: "images/Earring-black-gold-moonstar-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_moonstar"
+        stripeLink: "https://buy.stripe.com/TODO_earring_moonstar",
+        detailPage: "products/Earringblackgoldmoonstar.html"
       },
       {
         name: "Gold flake series",
@@ -157,7 +165,8 @@
         image: "images/Earring-black-gold-bullet-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_bullet"
+        stripeLink: "https://buy.stripe.com/TODO_earring_bullet",
+        detailPage: "products/Earringblackgoldbullet.html"
       },
       {
         name: "Gold flake series",
@@ -166,7 +175,8 @@
         image: "images/Earring-black-gold-drops-1.png",
         category: "earrings",
         subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_drops"
+        stripeLink: "https://buy.stripe.com/TODO_earring_drops",
+        detailPage: "products/Earringblackgolddrops.html"
       }
       // ...add more products here
     ];
@@ -189,7 +199,7 @@
       grid.innerHTML = filtered
         .map(
           (p) => `
-        <a href="${p.stripeLink}" target="_blank">
+        <a href="${p.detailPage}">
           <img src="${p.image}" width="200" alt="${p.name} ${p.variant}">
           <p class="product-title">${p.name}</p>
           ${p.variant ? `<p class="variant">${p.variant}</p>` : ""}
