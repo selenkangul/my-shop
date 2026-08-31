@@ -42,26 +42,29 @@ h1, h2, h3 {
   gap: 16px;
   background: var(--color-bg-header);
   margin: 0 -20px 40px;
-  padding: 16px 20px;
+  padding: 22px 28px;
   border-bottom: 3px solid var(--color-orange-dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .logo {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .brand-name {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   color: var(--color-text);
@@ -95,7 +98,8 @@ h1, h2, h3 {
 /* ===== Hero image (Workshop / Products pages) ===== */
 .hero-img {
   width: 100%;
-  max-height: 340px;
+  max-height: 440px;
+  min-height: 260px;
   object-fit: cover;
   border-radius: 14px;
   margin-bottom: 30px;
@@ -112,6 +116,60 @@ h1, h2, h3 {
 
 .workshop-details p {
   margin: 6px 0;
+}
+
+/* ===== Gallery carousel (Workshop page) ===== */
+.gallery {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.gallery-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-track::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 6px;
+}
+
+.gallery-track img {
+  scroll-snap-align: start;
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.gallery-arrow {
+  background: white;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--color-orange-dark);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.gallery-arrow:hover {
+  background: rgba(205, 118, 23, 0.08);
+  border-color: var(--color-orange-dark);
 }
 
 /* ===== Call-to-action buttons (Book a spot, See more, etc.) ===== */
@@ -155,6 +213,11 @@ h1, h2, h3 {
 }
 
 /* ===== Category filter buttons ===== */
+.category-filters {
+  gap: 14px 16px;
+  margin-bottom: 36px;
+}
+
 .category-filters button {
   padding: 9px 18px;
   border: 1.5px solid var(--color-border);
@@ -178,11 +241,81 @@ h1, h2, h3 {
   border-color: var(--color-orange-dark);
 }
 
+/* "Home Decorations" sub-menu — a vertical dropdown list, not a button row,
+   so it always fits regardless of screen width */
+#main-filters {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+#sub-filters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 220px;
+  max-width: 100%;
+  margin-top: 22px;
+  margin-bottom: 36px;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(46, 42, 38, 0.08);
+  padding: 8px;
+  gap: 2px;
+}
+
+#sub-filters::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+  transform: rotate(45deg);
+}
+
+#sub-filters::after {
+  content: "Home Decorations";
+  display: block;
+  order: -1;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #a89f92;
+  padding: 6px 10px 4px;
+}
+
+#sub-filters button {
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+#sub-filters button:hover {
+  background: var(--color-bg);
+}
+
+#sub-filters button.active {
+  background: var(--color-orange-dark);
+  color: white;
+  font-weight: 600;
+}
+
 /* ===== Product grid ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 28px;
+  margin-top: 36px;
 }
 
 .grid > a {
@@ -231,6 +364,71 @@ h1, h2, h3 {
 .price {
   color: var(--color-orange-dark);
   font-weight: 600;
+}
+
+/* ===== Product detail page ===== */
+.product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  margin-top: 20px;
+}
+
+.product-detail-img {
+  flex: 1 1 280px;
+  max-width: 340px;
+  max-height: 340px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.product-detail-info {
+  flex: 2 1 300px;
+}
+
+.product-detail-info h1 {
+  margin-bottom: 4px;
+}
+
+.product-detail-variant {
+  color: #6b6660;
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.product-detail-price {
+  font-size: 1.3rem;
+  margin: 14px 0 20px;
+}
+
+.product-detail-description {
+  color: #55504A;
+  margin: 16px 0 8px;
+}
+
+/* ===== Accordion (FAQ page + product detail specs) ===== */
+.accordion {
+  margin-top: 28px;
+  border-top: 1px solid var(--color-border);
+}
+
+details {
+  border-bottom: 1px solid var(--color-border);
+  padding: 16px 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+}
+
+details p {
+  margin-top: 10px;
+  color: #55504A;
 }
 
 /* ===== Footer ===== */
@@ -306,4 +504,84 @@ h1, h2, h3 {
 @media (max-width: 500px) {
   .footer-content { flex-direction: column; }
   .footer-address { text-align: left; }
+}
+
+/* ===== Responsive adjustments for phones/small screens ===== */
+@media (max-width: 640px) {
+  body {
+    padding: 0 16px 40px;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 18px;
+    margin: 0 -16px 28px;
+  }
+
+  .logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+  }
+
+  .nav-tabs {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav-tabs a {
+    padding: 6px 12px;
+    font-size: 0.88rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero {
+    padding: 24px 0;
+  }
+
+  .hero-img {
+    max-height: 260px;
+    min-height: 180px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .product-detail {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-detail-img {
+    max-width: 220px;
+    max-height: 220px;
+    margin: 0 auto;
+  }
+
+  #sub-filters {
+    width: 100%;
+  }
+
+  .gallery-track img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .category-filters {
+    gap: 10px 10px;
+  }
 }
