@@ -1,280 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products | ABAGI ART</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-</head>
-<body>
-
-  <header class="site-header">
-    <a href="index.html" class="logo-wrap">
-      <img src="images/abagi-logo.jpg" alt="Abagi Art logo" class="logo">
-      <span class="brand-name">ABAGI ART</span>
-    </a>
-    <nav>
-      <ul class="nav-tabs">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="workshop.html">Workshop</a></li>
-        <li><a href="products.html" class="active">Products</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <h1>Products</h1>
-
-  <!-- Top-level category buttons -->
-  <div class="category-filters" id="main-filters">
-    <button data-category="all" class="active">View All</button>
-    <button data-category="earrings">Earrings</button>
-    <button data-category="home-decor">Home Decorations</button>
-  </div>
-
-  <!-- Home-decoration subcategories; hidden after a category is selected -->
-  <div class="category-filters" id="sub-filters" style="display: none;">
-    <button data-subcategory="all" class="active">All Home Decor</button>
-    <button data-subcategory="vase">Vases</button>
-    <button data-subcategory="candles">Candles</button>
-    <button data-subcategory="trays">Trays</button>
-    <button data-subcategory="boxes">Boxes</button>
-    <button data-subcategory="bowls">Bowls</button>
-    <button data-subcategory="coasters">Coasters</button>
-    <button data-subcategory="incense-holders">Incense Holders</button>
-  </div>
-
-  <h2 id="selected-subcategory-title" style="display: none;"></h2>
-  <div class="grid" id="product-grid"></div>
-
-  <script>
-    // ===== YOUR PRODUCT CATALOG =====
-    // Add a new product by copying one object below and editing it.
-    // category: "earrings" or "home-decor"
-    // subcategory: only matters for home-decor items — use one of:
-    //   vase, candles, trays, boxes, bowls, coasters, incense-holders
-    // stripeLink: paste your real Stripe Payment Link URL here once created
-    const products = [
-      {
-        name: "Round Vase",
-        variant: "",
-        price: 45.00,
-        image: "images/round-vase-1.jpg",
-        category: "home-decor",
-        subcategory: "vase",
-        stripeLink: "https://buy.stripe.com/TODO_round_vase",
-        detailPage: "products/Vase.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Round",
-        price: 22.00,
-        image: "images/Earring-black-gold-round-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_round",
-        detailPage: "products/Earringblackgoldround.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Organic",
-        price: 35.00,
-        image: "images/Earring-black-gold-organic-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_organic",
-        detailPage: "products/Earringblackgoldorganic.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Rock 1",
-        price: 22.00,
-        image: "images/Earring-black-gold-rock-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_rock1",
-        detailPage: "products/Earringblackgoldrock1.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Rock 2",
-        price: 22.00,
-        image: "images/Earring-black-gold-rock-2.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_rock2",
-        detailPage: "products/Earringblackgoldrock2.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Asymetric",
-        price: 35.00,
-        image: "images/Earring-black-gold-asymetric-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_asymetric",
-        detailPage: "products/Earringblackgoldasymetric.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Oval",
-        price: 35.00,
-        image: "images/Earring-black-gold-oval-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_oval",
-        detailPage: "products/Earringblackgoldoval.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Rectangle",
-        price: 35.00,
-        image: "images/Earring-black-gold-rectangle-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_rectangle",
-        detailPage: "products/Earringblackgoldrectangle.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Edges",
-        price: 35.00,
-        image: "images/Earring-black-gold-edges-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_edges",
-        detailPage: "products/Earringblackgoldedges.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Moon-Star",
-        price: 35.00,
-        image: "images/Earring-black-gold-moonstar-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_moonstar",
-        detailPage: "products/Earringblackgoldmoonstar.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Bullet",
-        price: 35.00,
-        image: "images/Earring-black-gold-bullet-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_bullet",
-        detailPage: "products/Earringblackgoldbullet.html"
-      },
-      {
-        name: "Gold flake series",
-        variant: "Black | Drops",
-        price: 35.00,
-        image: "images/Earring-black-gold-drops-1.png",
-        category: "earrings",
-        subcategory: null,
-        stripeLink: "https://buy.stripe.com/TODO_earring_drops",
-        detailPage: "products/Earringblackgolddrops.html"
-      }
-      // ...add more products here
-    ];
-
-    let activeCategory = "all";
-    let activeSubcategory = "all";
-
-    function renderProducts() {
-      const grid = document.getElementById("product-grid");
-
-      const filtered = products.filter((p) => {
-        if (activeCategory === "all") return true;
-        if (p.category !== activeCategory) return false;
-        if (activeCategory === "home-decor" && activeSubcategory !== "all") {
-          return p.subcategory === activeSubcategory;
-        }
-        return true;
-      });
-
-      grid.innerHTML = filtered
-        .map(
-          (p) => `
-        <a href="${p.detailPage}">
-          <img src="${p.image}" width="200" alt="${p.name} ${p.variant}">
-          <p class="product-title">${p.name}</p>
-          ${p.variant ? `<p class="variant">${p.variant}</p>` : ""}
-          <p class="price">CHF ${p.price.toFixed(2)}</p>
-        </a>
-      `
-        )
-        .join("");
-    }
-
-    // Top-level filter buttons
-    document.querySelectorAll("#main-filters button").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document
-          .querySelectorAll("#main-filters button")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        activeCategory = btn.dataset.category;
-        activeSubcategory = "all";
-
-        document.getElementById("sub-filters").style.display =
-          activeCategory === "home-decor" ? "flex" : "none";
-        const selectedTitle = document.getElementById("selected-subcategory-title");
-        selectedTitle.style.display = "none";
-        selectedTitle.textContent = "";
-        document
-          .querySelectorAll("#sub-filters button")
-          .forEach((b) => b.classList.remove("active"));
-        document.querySelector('#sub-filters button[data-subcategory="all"]')
-          .classList.add("active");
-
-        renderProducts();
-      });
-    });
-
-    // Sub-category filter buttons
-    document.querySelectorAll("#sub-filters button").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document
-          .querySelectorAll("#sub-filters button")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeSubcategory = btn.dataset.subcategory;
-        const selectedTitle = btn.textContent.trim();
-        document.getElementById("sub-filters").style.display = "none";
-        const title = document.getElementById("selected-subcategory-title");
-        title.textContent = selectedTitle;
-        title.style.display = "block";
-        renderProducts();
-      });
-    });
-
-    renderProducts();
-  </script>
-
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-contact">
-        <a href="mailto:abagi.art@gmail.com" class="footer-icon-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
-          abagi.art@gmail.com
-        </a>
-        <a href="https://www.instagram.com/abagi_art?igsh=OTJkN3EyNHk2a3dx&utm_source=qr" target="_blank" class="footer-icon-link" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-        </a>
-      </div>
-      <div class="footer-address">
-        <p class="footer-address-title">Where to find Abagi products</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Station.24+Lausanne" target="_blank">Station.24, Lausanne</a>
-      </div>
-    </div>
-    <p class="footer-copy">&copy; 2026 Abagi Art. Handmade in Switzerland.</p>
-  </footer>
-
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Products | ABAGI ART</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="icon" href="images/favicon.ico"></head><body><header class="site-header"><a href="index.html" class="logo-wrap"><img src="images/abagi-logo.jpg" alt="Abagi Art logo" class="logo"><span class="brand-name">ABAGI ART</span></a><nav><ul class="nav-tabs"><li><a href="index.html" class="">Home</a></li><li><a href="workshop.html" class="">Workshop</a></li><li><a href="products.html" class="active">Products</a></li><li><a href="faq.html" class="">FAQ</a></li></ul></nav></header><main class="catalog-main"><div class="page-intro"><p class="eyebrow">MADE WITH CARE</p><h1>Our Products</h1><p>Discover handmade Jesmonite home décor and unique earrings. Each piece is individually crafted, so every finish has its own character.</p></div><section class="catalog-controls" aria-label="Product filters"><div class="filter-group"><span class="filter-label">Shop by category</span><div class="filter-buttons" id="main-filters"><button class="filter-btn active" data-main="all">View all</button><button class="filter-btn" data-main="Earrings">Earrings</button><button class="filter-btn" data-main="Home Decorations">Home Decorations</button></div></div><div class="filter-group" id="sub-filter-group" hidden><span class="filter-label">Refine your selection</span><div class="filter-buttons" id="sub-filters"></div></div><p class="result-count" id="result-count" aria-live="polite"></p></section><section class="product-grid" id="product-grid" aria-label="Products"></section><p class="empty-state" id="empty-state" hidden>No products found in this category.</p></main><footer class="site-footer"><div class="footer-content"><div class="footer-contact"><a href="mailto:abagi.art@gmail.com" class="footer-icon-link">✉ abagi.art@gmail.com</a><a href="https://www.instagram.com/abagi_art?igsh=OTJkN3EyNHk2a3dx&utm_source=qr" target="_blank" rel="noopener" class="footer-icon-link" aria-label="Instagram">Instagram</a></div><div class="footer-address"><p class="footer-address-title">Where to find Abagi products</p><a href="https://www.google.com/maps/search/?api=1&query=Station.24+Lausanne" target="_blank" rel="noopener">Station.24, Lausanne</a></div></div><p class="footer-copy">&copy; ABAGI ART</p></footer><script>
+const products=[{"name": "Round Vase", "variant": "Green Marble", "price": "CHF 32", "image": "images/Round-vase-green.jpg", "page": "products/Roundvasegreen.html", "paths": [["Home Decorations", "Vases"]]}, {"name": "Stripped Vase", "variant": "Blue Marble", "price": "CHF 30", "image": "images/Strippedvasebluemarble.jpg", "page": "products/Strippedvasebluemarble.html", "paths": [["Home Decorations", "Vases"]]}, {"name": "Decorative Bowl", "variant": "Yellow Marble", "price": "CHF 35", "image": "images/Decorative-bowl-yellow.jpg", "page": "products/Decorativebowlyellow.html", "paths": [["Home Decorations", "Bowls"]]}, {"name": "Round Tray", "variant": "Pink-White", "price": "CHF 12", "image": "images/Roundtraypinkwhite.jpg", "page": "products/Roundtraypinkwhite.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Coasters"]]}, {"name": "Round Tray", "variant": "White-Blue Terrazzo", "price": "CHF 12", "image": "images/Roundtraywhiteblueterrazzo.jpg", "page": "products/Roundtraywhiteblueterrazzo.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Coasters"]]}, {"name": "Hexagonal Tray", "variant": "Gree-Yellow Terrazzo", "price": "CHF 12", "image": "images/Hexagonaltraygreenyellowterrazzo.jpg", "page": "products/Hexagonaltraygreenyellowterrazzo.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Coasters"]]}, {"name": "Duo Candle Holder", "variant": "Pink Marble", "price": "CHF 15", "image": "images/Duocandleholderpinkmarble.jpg", "page": "products/Duocandleholderpinkmarble.html", "paths": [["Home Decorations", "Candle Holders"]]}, {"name": "Round Coaster", "variant": "Pink Faded", "price": "CHF 8 ", "image": "images/Roundcoasterpinkfaded.jpg", "page": "products/Roundcoasterpinkfaded.html", "paths": [["Home Decorations", "Coasters"]]}, {"name": "Round Coaster", "variant": "Green-Yellow Terrazzo", "price": "CHF 8 ", "image": "images/Roundcoastergreenyellowterrazzo.jpg", "page": "products/Roundcoastergreenyellowterrazzo.html", "paths": [["Home Decorations", "Coasters"]]}, {"name": "Square Coaster", "variant": "Green-Yellow Terrazzo", "price": "CHF 8 ", "image": "images/Squarecoastergreenyellowterrazzo.jpg", "page": "products/Squarecoastergreenyellowterrazzo.html", "paths": [["Home Decorations", "Coasters"]]}, {"name": "Christmas Tree Tray", "variant": "Pink Marble", "price": "CHF 30", "image": "images/Christmastreetraypinkmarble.jpg", "page": "products/Christmastreetraypinkmarble.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Tray", "variant": "Blue Marble", "price": "CHF 30", "image": "images/Christmastreetraybluemarble.jpg", "page": "products/Christmastreetraybluemarble.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Tray", "variant": "White-Green Glitter", "price": "CHF 30 ", "image": "images/Christmastreetraywhitegreenglitter1.jpg", "page": "products/Christmastreetraywhitegreenglitter1.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Tray", "variant": "White-Green Glitter", "price": "CHF 30", "image": "images/Christmastreetraywhitegreenglitter2.jpg", "page": "products/Christmastreetraywhitegreenglitter2.html", "paths": [["Home Decorations", "Trays"], ["Home Decorations", "Jewelery Holders"], ["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Christmas Tree | Green | Marble", "price": "CHF 7", "image": "images/XMSTreeDecTreeGreenM.jpg", "page": "products/XMSTreeDecTreeGreenM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Christmas Tree | Turquoise | Marble", "price": "CHF 7", "image": "images/XMSTreeDecTreeTurquoiseM.jpg", "page": "products/XMSTreeDecTreeTurquoiseM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Christmas Tree | Colorful | Marble", "price": "CHF 7", "image": "images/XMSTreeDecTreeColorfulM.jpg", "page": "products/XMSTreeDecTreeColorfulM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-dear | Green | Marble", "price": "CHF 7", "image": "images/XMSTreeDecBellDearGreenM.jpg", "page": "products/XMSTreeDecBellDearGreenM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-dear | Turquoise | Marble", "price": "CHF 7", "image": "images/XMSTreeDecBellDearTurquoiseM.jpg", "page": "products/XMSTreeDecBellDearTurquoiseM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-dear | White | Glitter", "price": "CHF 7", "image": "images/XMSTreeDecBellDearWhiteG.jpg", "page": "products/XMSTreeDecBellDearWhiteG.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-christmas tree | Green | Marble", "price": "CHF 7", "image": "images/XMSTreeDecBellTreeGreenM.jpg", "page": "products/XMSTreeDecBellTreeGreenM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-christmas tree | Colorful | Marble", "price": "CHF 7", "image": "images/XMSTreeDecBellTreeColorfulM.jpg", "page": "products/XMSTreeDecBellTreeColorfulM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-christmas tree | Turquoise | Marble", "price": "CHF 7", "image": "images/XMSTreeDecBellTreeTurquoiseM.jpg", "page": "products/XMSTreeDecBellTreeTurquoiseM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Bell-christmas tree | Gray-red | Marble", "price": "CHF 7", "image": "images/XMSTreeDecBellTreeGrayRedM.jpg", "page": "products/XMSTreeDecBellTreeGrayRedM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Round | Green | Marble", "price": "CHF 7", "image": "images/XMSTreeDecRoundGreenM.jpg", "page": "products/XMSTreeDecRoundGreenM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Round | Gray-red | Marble", "price": "CHF 7", "image": "images/XMSTreeDecRoundGrayRedM.jpg", "page": "products/XMSTreeDecRoundGrayRedM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Round | Colorful | Marble", "price": "CHF 7", "image": "images/XMSTreeDecRoundColorfulM.jpg", "page": "products/XMSTreeDecRoundColorfulM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Round | White | Glitter", "price": "CHF 7", "image": "images/XMSTreeDecRoundWhiteG.jpg", "page": "products/XMSTreeDecRoundWhiteG.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Round | Blue | Marble", "price": "CHF 7", "image": "images/XMSTreeDecRoundBlueM.jpg", "page": "products/XMSTreeDecRoundBlueM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Snowflake | Green | Marble", "price": "CHF 7", "image": "images/XMSTreeDecSnowGreenM.jpg", "page": "products/XMSTreeDecSnowGreenM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Christmas Tree Decoration", "variant": "Snowflake | Turquoise | Marble", "price": "CHF 7", "image": "images/XMSTreeDecSnowTurquoiseM.jpg", "page": "products/XMSTreeDecSnowTurquoiseM.html", "paths": [["Home Decorations", "Christmas"]]}, {"name": "Gold flake series", "variant": "Black | Round", "price": "CHF 22", "image": "images/Earring-black-gold-round-1.png", "page": "products/Earringblackgoldround.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Organic", "price": "CHF 35", "image": "images/Earring-black-gold-organic-1.png", "page": "products/Earringblackgoldorganic.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Rock 1", "price": "CHF 22", "image": "images/Earring-black-gold-rock-1.png", "page": "products/Earringblackgoldrock1.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Rock 2", "price": "CHF 22", "image": "images/Earring-black-gold-rock-2.png", "page": "products/Earringblackgoldrock2.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Asymetric", "price": "CHF 35", "image": "images/Earring-black-gold-asymetric-1.png", "page": "products/Earringblackgoldasymetric.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Oval", "price": "CHF 35", "image": "images/Earring-black-gold-oval-1.png", "page": "products/Earringblackgoldoval.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Rectangle", "price": "CHF 35", "image": "images/Earring-black-gold-rectangle-1.png", "page": "products/Earringblackgoldrectangle.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Edges", "price": "CHF 35", "image": "images/Earring-black-gold-edges-1.png", "page": "products/Earringblackgoldedges.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Moon-Star", "price": "CHF 35", "image": "images/Earring-black-gold-moonstar-1.png", "page": "products/Earringblackgoldmoonstar.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Bullet", "price": "CHF 35", "image": "images/Earring-black-gold-bullet-1.png", "page": "products/Earringblackgoldbullet.html", "paths": [["Earrings"]]}, {"name": "Gold flake series", "variant": "Black | Drops", "price": "CHF 35", "image": "images/Earring-black-gold-drops-1.png", "page": "products/Earringblackgolddrops.html", "paths": [["Earrings"]]}];
+let selectedMain="all", selectedSub="all";
+const mainFilters=document.getElementById("main-filters");
+const subGroup=document.getElementById("sub-filter-group");
+const subFilters=document.getElementById("sub-filters");
+function makeButton(label, value, active, attr) {
+ const b=document.createElement("button"); b.className="filter-btn"+(active?" active":""); b.textContent=label; b.dataset[attr]=value; return b;
+}
+function renderSubs() {
+ subFilters.replaceChildren(); selectedSub="all";
+ const subs=[...new Set(products.flatMap(p=>p.paths.filter(x=>x[0]===selectedMain&&x[1]).map(x=>x[1])))].sort((a,b)=>a.localeCompare(b));
+ subGroup.hidden=selectedMain==="all"||subs.length===0;
+ if(!subGroup.hidden) {
+   subFilters.append(makeButton("All "+selectedMain,"all",true,"sub"));
+   subs.forEach(s=>subFilters.append(makeButton(s,s,false,"sub")));
+ }
+}
+function render() {
+ const filtered=products.filter(p=>selectedMain==="all"||p.paths.some(path=>path[0]===selectedMain&&(selectedSub==="all"||path[1]===selectedSub)));
+ const grid=document.getElementById("product-grid"); grid.replaceChildren();
+ filtered.forEach(p=>{
+  const a=document.createElement("a"); a.className="product-card"; a.href=p.page;
+  const img=document.createElement("img"); img.src=p.image; img.alt=[p.name,p.variant].filter(Boolean).join(" — "); img.loading="lazy"; img.onerror=()=>{img.classList.add("image-missing");img.alt="Product image unavailable";};
+  const body=document.createElement("div"); body.className="product-card-body";
+  const h=document.createElement("h2"); h.textContent=p.name;
+  body.append(h);
+  if(p.variant){const v=document.createElement("p");v.className="product-variant";v.textContent=p.variant;body.append(v);}
+  const price=document.createElement("p");price.className="price";price.textContent=p.price;body.append(price);
+  const more=document.createElement("span");more.className="card-link";more.textContent="View product →";body.append(more);
+  a.append(img,body);grid.append(a);
+ });
+ document.getElementById("result-count").textContent=filtered.length+" "+(filtered.length===1?"product":"products");
+ document.getElementById("empty-state").hidden=filtered.length!==0;
+}
+mainFilters.addEventListener("click",e=>{const b=e.target.closest("button[data-main]");if(!b)return;selectedMain=b.dataset.main;mainFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderSubs();render();});
+subFilters.addEventListener("click",e=>{const b=e.target.closest("button[data-sub]");if(!b)return;selectedSub=b.dataset.sub;subFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));render();});
+render();
+</script></body></html>
