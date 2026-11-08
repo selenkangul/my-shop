@@ -36,7 +36,7 @@
     <button data-category="home-decor">Home Decorations</button>
   </div>
 
-  <!-- Sub-category buttons, only shown when "Home Decorations" is selected -->
+  <!-- Home-decoration subcategories; hidden after a category is selected -->
   <div class="category-filters" id="sub-filters" style="display: none;">
     <button data-subcategory="all" class="active">All Home Decor</button>
     <button data-subcategory="vase">Vases</button>
@@ -48,6 +48,7 @@
     <button data-subcategory="incense-holders">Incense Holders</button>
   </div>
 
+  <h2 id="selected-subcategory-title" style="display: none;"></h2>
   <div class="grid" id="product-grid"></div>
 
   <script>
@@ -223,6 +224,9 @@
 
         document.getElementById("sub-filters").style.display =
           activeCategory === "home-decor" ? "flex" : "none";
+        const selectedTitle = document.getElementById("selected-subcategory-title");
+        selectedTitle.style.display = "none";
+        selectedTitle.textContent = "";
         document
           .querySelectorAll("#sub-filters button")
           .forEach((b) => b.classList.remove("active"));
@@ -241,6 +245,11 @@
           .forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         activeSubcategory = btn.dataset.subcategory;
+        const selectedTitle = btn.textContent.trim();
+        document.getElementById("sub-filters").style.display = "none";
+        const title = document.getElementById("selected-subcategory-title");
+        title.textContent = selectedTitle;
+        title.style.display = "block";
         renderProducts();
       });
     });
