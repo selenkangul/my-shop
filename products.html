@@ -36,7 +36,7 @@ function render() {
  document.getElementById("result-count").textContent=filtered.length+" "+(filtered.length===1?"product":"products");
  document.getElementById("empty-state").hidden=filtered.length!==0;
 }
-mainFilters.addEventListener("click",e=>{const b=e.target.closest("button[data-main]");if(!b)return;selectedMain=b.dataset.main;mainFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderSubs();render();});
-subFilters.addEventListener("click",e=>{const b=e.target.closest("button[data-sub]");if(!b)return;selectedSub=b.dataset.sub;subGroup.hidden=selectedSub!=="all";subFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));render();});
+mainFilters.addEventListener("click",e=>{const b=e.target.closest("button[data-main]");if(!b)return;const wasHomeDecorationsOpen=selectedMain==="Home Decorations"&&!subGroup.hidden&&b.dataset.main==="Home Decorations";selectedMain=b.dataset.main;mainFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderSubs();if(wasHomeDecorationsOpen)subGroup.hidden=true;render();});
+subFilters.addEventListener("click",e=>{const b=e.target.closest("button[data-sub]");if(!b)return;selectedSub=b.dataset.sub;subGroup.hidden=true;subFilters.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));render();});
 render();
 </script></body></html>

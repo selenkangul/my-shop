@@ -817,3 +817,16 @@ body.lightbox-open { overflow:hidden; }
   .workshop-photo-button { flex-basis:88%; }
   .free-shipping-home { flex-direction:column; gap:3px; }
 }
+
+
+/* ===== Requested workshop page spacing and booking button placement ===== */
+.workshop-hero-img {
+  margin-bottom: 8px;
+}
+.workshop-details .btn {
+  display: inline-block;
+  margin-top: 8px;
+}
+.workshop-details p:last-child {
+  margin-bottom: 2px;
+}
