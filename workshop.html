@@ -66,11 +66,67 @@
 
   <div class="section">
     <h2>From Our Workshops</h2>
-    <div class="workshop-photo-grid">
-      <div class="workshop-photo-placeholder"><span>Workshop photo 1</span><small>workshop-1.jpg</small></div>
-      <div class="workshop-photo-placeholder"><span>Workshop photo 2</span><small>workshop-2.jpg</small></div>
-      <div class="workshop-photo-placeholder"><span>Workshop photo 3</span><small>workshop-3.jpg</small></div>
+    <div class="workshop-gallery" aria-label="Workshop photographs">
+      <button class="gallery-arrow gallery-prev" type="button" aria-label="Previous workshop photo">&#8592;</button>
+      <div class="workshop-photo-grid" id="workshop-photo-grid">
+        {photos_markup}
+      </div>
+      <button class="gallery-arrow gallery-next" type="button" aria-label="Next workshop photo">&#8594;</button>
     </div>
+    <div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Workshop photo viewer">
+      <button class="lightbox-close" type="button" aria-label="Close photo viewer">&times;</button>
+      <button class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous photo">&#8592;</button>
+      <img id="lightbox-image" src="images/workshop-1.jpg" alt="Workshop photograph">
+      <button class="lightbox-arrow lightbox-next" type="button" aria-label="Next photo">&#8594;</button>
+      <span class="lightbox-count" id="lightbox-count">1 / 6</span>
+    </div>
+    <script>
+    (() => {
+      const photos = Array.from({length: 6}, (_, i) => `images/workshop-${i + 1}.jpg`);
+      const grid = document.getElementById('workshop-photo-grid');
+      const lightbox = document.getElementById('gallery-lightbox');
+      const large = document.getElementById('lightbox-image');
+      const count = document.getElementById('lightbox-count');
+      let current = 0;
+      let start = 0;
+      photos.forEach((src, i) => {
+        const button = document.createElement('button');
+        button.className = 'workshop-photo-button';
+        button.type = 'button';
+        button.setAttribute('aria-label', `Enlarge workshop photo ${i + 1}`);
+        const img = document.createElement('img');
+        img.src = src; img.alt = `Abagi Art workshop ${i + 1}`; img.loading = 'lazy';
+        button.append(img); button.addEventListener('click', () => openAt(i)); grid.append(button);
+      });
+      function show(index) {
+        current = (index + photos.length) % photos.length;
+        large.src = photos[current]; large.alt = `Abagi Art workshop ${current + 1}`;
+        count.textContent = `${current + 1} / ${photos.length}`;
+      }
+      function openAt(index) {
+        show(index); lightbox.classList.add('is-open'); lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+      }
+      function close() {
+        lightbox.classList.remove('is-open'); lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+      }
+      function prev(){show(current - 1)} function next(){show(current + 1)}
+      document.querySelector('.gallery-prev').addEventListener('click',()=>grid.scrollBy({left:-grid.clientWidth,behavior:'smooth'}));
+      document.querySelector('.gallery-next').addEventListener('click',()=>grid.scrollBy({left:grid.clientWidth,behavior:'smooth'}));
+      document.querySelector('.lightbox-prev').addEventListener('click',prev);
+      document.querySelector('.lightbox-next').addEventListener('click',next);
+      document.querySelector('.lightbox-close').addEventListener('click',close);
+      lightbox.addEventListener('click',e=>{if(e.target===lightbox)close()});
+      document.addEventListener('keydown',e=>{
+        if(!lightbox.classList.contains('is-open'))return;
+        if(e.key==='Escape')close(); if(e.key==='ArrowLeft')prev(); if(e.key==='ArrowRight')next();
+      });
+      let touchX=0;
+      lightbox.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].screenX},{passive:true});
+      lightbox.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchX;if(Math.abs(dx)>40){dx<0?next():prev()}},{passive:true});
+    })();
+    </script>
   </div>
 
   <footer class="site-footer">
