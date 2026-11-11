@@ -830,3 +830,10 @@ body.lightbox-open { overflow:hidden; }
 .workshop-details p:last-child {
   margin-bottom: 2px;
 }
+
+/* Language selector */
+.site-header { position: relative; }
+.language-switcher { display:flex; align-items:center; margin-left:18px; }
+.language-switcher select { font: inherit; color: inherit; background: transparent; border: 1px solid rgba(0,0,0,.22); border-radius: 6px; padding: 7px 9px; cursor:pointer; }
+.visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@media (max-width:700px) { .site-header { flex-wrap:wrap; } .language-switcher { margin-left:auto; } }
